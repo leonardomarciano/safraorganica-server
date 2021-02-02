@@ -52,3 +52,6 @@ Route.post(`${_PREFIX}/user/login`, 'UserController.create')
 Route.resource(`${_PREFIX}/advertisement`, 'AdvertisementController')
   .apiOnly()
   .middleware('auth')
+
+Route.post(`${_PREFIX}/product/:id/images`, 'ImageController.store')
+  .middleware('auth')
