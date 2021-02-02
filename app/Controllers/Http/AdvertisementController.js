@@ -120,7 +120,33 @@ class AdvertisementController {
    * @param {Request} ctx.request
    * @param {Response} ctx.response
    */
-  async update ({ params, request, response }) {
+  async update ({ params, request, response, auth }) {
+    try {
+      const advertisement = await Advertisement.findOrFail(params.id)
+      const data = request.only([
+        'title',
+        'address',
+        'latitude',
+        'longitude',
+        'coverage',
+        'payments_methods',
+      ])
+
+      if (advertisement.user_id !== auth.user.id) {
+        return response.status(401).send({ code: 'UNAUTHORIZED',
+        message: 'Not authorized' })
+      }
+      advertisement.merge(data)
+      await advertisement.save()
+      return advertisement      
+    } catch (error) {
+      console.log(error)
+      response.status(404).json({
+        code: 'NOT_FOUND',
+        message: 'Resource not found'
+      })
+    }
+
   }
 
   /**
