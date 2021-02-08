@@ -41,6 +41,7 @@ Route.post(`${_PREFIX}/user/login`, 'SessionController.create')
 */
 Route.post(`${_PREFIX}/user/registration`, 'UserController.create')
 Route.post(`${_PREFIX}/user/login`, 'UserController.create')
+Route.get('public/images/:path', 'ImageController.show')
 
 /*
 |--------------------------------------------------------------------------
