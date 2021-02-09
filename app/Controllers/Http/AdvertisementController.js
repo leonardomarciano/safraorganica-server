@@ -23,7 +23,7 @@ class AdvertisementController {
     const { latitude, longitude, range } = request.all()
 
     const advertisement = Advertisement.query()
-    .with('image')
+    // .with('image')
     .nearBy(latitude, longitude, range)
     .fetch()
 

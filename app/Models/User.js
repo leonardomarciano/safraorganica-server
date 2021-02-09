@@ -35,6 +35,10 @@ class User extends Model {
     return this.hasMany('App/Models/Token')
   }
 
+  transaction () {
+    return this.hasMany('App/Models/Transaction')
+  }
+
   advertisement(){
     return this.hasOne('App/Models/Advertisement')
   }

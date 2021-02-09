@@ -56,3 +56,16 @@ Route.resource(`${_PREFIX}/advertisement`, 'AdvertisementController')
 
 Route.post(`${_PREFIX}/product/:id/images`, 'ImageController.store')
   .middleware('auth')
+
+/*
+|--------------------------------------------------------------------------
+| Financial Routes
+|--------------------------------------------------------------------------
+| Routes for using the Advertisement model.
+| Methods: Index, show, store, update, destroy
+*/
+
+Route.get(`${_PREFIX}/user/balance`, 'TransactionController.balance')
+.middleware('auth')
+Route.post(`${_PREFIX}/user/financial/credit`, 'TransactionController.credit')
+.middleware('auth')
