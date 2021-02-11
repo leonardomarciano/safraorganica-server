@@ -58,6 +58,27 @@ class TransactionController {
   response.json(t)
   }
 
+  async debit ({ request, response, auth }) {
+    const {type, origin, cashierName, Description, amount} = request.body
+    const {id} = auth.user
+    const c = await User.find(id)
+    const l = await Transaction.query().where('user_id', id).last()
+
+    const newBalance = parseFloat(l.newBalance) - parseFloat(amount);
+    await  c.transaction().create({
+      type: 'credit',
+      origin,
+      cashierName,
+      Description,
+      amount,
+      newBalance: newBalance,
+      oldBalance: l.oldBalance
+    })
+
+  const t = await Transaction.query().where('user_id', id).last()
+  response.json(t)
+  }
+
   /**
    * Create/save a new transaction.
    * POST transactions
