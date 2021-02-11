@@ -69,3 +69,11 @@ Route.get(`${_PREFIX}/user/balance`, 'TransactionController.balance')
 .middleware('auth')
 Route.post(`${_PREFIX}/user/financial/credit`, 'TransactionController.credit')
 .middleware('auth')
+
+Route.get(`${_PREFIX}/user/financial/mercadopago/test`, 'TransactionController.show')
+.middleware('auth')
+
+Route.post(`/mercadopago`, 'TransactionController.notificationService')
+
+
+
